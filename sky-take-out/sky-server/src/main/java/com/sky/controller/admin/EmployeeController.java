@@ -76,4 +76,8 @@ public class EmployeeController {
         return Result.success();
     }
 
+    public Result save(){
+        return null;
+    }
+
 }
