@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.time.LocalDateTime;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -60,6 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 //    @Override
     public void save(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
         //对象属性拷贝
         BeanUtils.copyProperties(employeeDTO,employee);
 
@@ -68,11 +71,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex((PasswordConstant.DEFAULT_PASSWORD.getBytes())));
 
         //当前记录的创建时间和修改时间
-        employee.setCreateTime(LocalDataTime.now());
-        employee.setUpdataTime(LocalDataTime.now());
+        //TODO 后期需要改为登录用户的id
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
 
         employee.setCreateUser(10L);
-        employee.setUpdataUser(10L);
+        employee.setUpdateUser(10L);
+
+        employeeMapper.insert(employee);
 
     }
 

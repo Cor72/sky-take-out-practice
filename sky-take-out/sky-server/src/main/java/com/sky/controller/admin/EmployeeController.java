@@ -80,9 +80,9 @@ public class EmployeeController {
     @PostMapping
     @ApiOperation("新增员工")
     public Result save(@RequestBody EmployeeDTO employeeDTO){
-        log.info("新規従業員の増加：{}",employeeDTO);
+        log.info("新员工增加：{}",employeeDTO);
         employeeService.save(employeeDTO);
-        return null;
+        return Result.success("新员工增加成功");
     }
 
 }
